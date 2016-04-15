@@ -33,8 +33,42 @@ POST    http://ontop.tech/api/push?is_post=1
 
 ### Java (Android)
 To make things easier I've added a class called `OnTop.java` for use in Android applictions that should make things easier Feel free to edit it as you need.
-Just one dependency, you need LoopJ's Asynchronous Http client for Android or you can modify `OnTop#send()` to use your own system.
+Just one dependency, you need [LoopJ's](http://loopj.com/android-async-http/) Asynchronous Http client for Android or you can modify `OnTop.send()` to use your own method.
 Add the line below to your app.gradle
 ```
 compile 'com.loopj.android:android-async-http:1.4.9'
+```
+The class is easy enough to use. You can also read the docs for each method in the to get more details.
+```java
+OnTop ontop = new OnTop(YOUR_APP_ID, YOUR_APP_SECRET);
+ontop.setMessage("This is a test for appID: " + APP_ID);
+ontop.send();
+
+//or just
+new OnTop(APP_ID, APP_SECRET).setMessage("This is a test for appID: " + APP_ID).send();
+```
+You can also set any of the following options to help you manage your events
+#### Setting Category
+```Java
+ontop.setCategory(STRING);
+```
+#### Setting action
+```Java
+ontop.setAction(STRING);
+```
+#### Setting View tag
+```Java
+ontop.setView(STRING);
+```
+#### Setting Custom fields
+KEY should be a string such as "user_id", "user_name", etc
+VALUE can be of type String, int, boolean, long, or float
+Just keep in mind that if you plan on using long strings or lots of data for custom, to use either use `send()` method or if you're doing manually to use the POST end method.
+```Java
+ontop.setCustom(KEY, VALUE);
+```
+#### Adjustments
+```Java
+ontop.setNotificationSound(boolean);
+ontop.setNotificationVibrate(boolean);
 ```
