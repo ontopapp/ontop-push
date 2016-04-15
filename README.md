@@ -11,5 +11,8 @@ GET http://ontop.tech/api/send
     key         app_secret
     message     Any text
 ```
+I also plan to provide class files for Android, PHP, and other languages soon to make things easier.
 
 ## Api docs
+### Java (Android)
+
