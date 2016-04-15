@@ -48,31 +48,54 @@ ontop.send();
 new OnTop(YOUR_APP_ID, YOUR_APP_SECRET).setMessage("This is a test for appID: " + YOUR_APP_ID).send();
 ```
 You can also set any of the following options to help you manage your events
-#### Setting Category
+##### Setting Category
 ```Java
+/**
+ * Add a category to represent the entities/categories. (i.e. "user", "song")
+ * Can contain only alphabet, underscore, and numbers with max 64 characters.
+ */
 ontop.setCategory(String);
 ```
-#### Setting action
+##### Setting action
 ```Java
+/**
+ * Add a action tag to represent the action performed. (i.e. "like", "add", "share")
+ * Can contain only alphabet, underscore, and numbers with max 64 characters.
+ */
 ontop.setAction(String);
 ```
-#### Setting View tag
+##### Setting View tag
 ```Java
+/**
+ * Add a view tag to represent the view/page that the event has occurred. (i.e. "login", "new_item")
+ * Can contain only alphabet, underscore, and numbers with max 64 characters.
+ */
 ontop.setView(String);
 ```
-#### Setting Custom fields
-KEY should be a string such as "user_id", "user_name", etc
-VALUE can be of type String, int, boolean, long, or float
+##### Setting Custom fields
 Just keep in mind that if you plan on using long strings or lots of data for custom, to use either use `send()` method or if you're doing it manually, to use the POST end method.
 ```Java
+/**
+ * Add a custom field to hold any meta data for future reference.
+ * KEY      should be a string such as "user_id", "user_name", etc
+ * VALUE    can be of type String, int, boolean, long, or float
+ */
 ontop.setCustom(KEY, VALUE);
 ```
-#### Other Adjustments
+##### Other Adjustments
 ```Java
+/** If set to false the notification you receive wont vibrate your phone (it's true by default) */
 ontop.setNotificationSound(boolean);
+/** If set to true the notification you receive will beep your phone (its falseby default cause it gets annoying!) */
 ontop.setNotificationVibrate(boolean);
 ```
 
+### To Do
+Here are some additions I'm thinking of, feel free to suggest more
+* Multiple users per app (so a team can stay on top of whats happening)
+* More comprehensive event search/filtering on app side
+* Basic app stats
+* A seperate messaging api to help connect your users to you so can give them live assistance.
 
 ## Contact
 This is a fairly new API so if there's anything that you think would be cool to add or if there's any issues please definitely let me know!
