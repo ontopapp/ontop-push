@@ -96,6 +96,7 @@ Here are some additions I'm thinking of, feel free to suggest more
 * More comprehensive event search/filtering on app side
 * Basic app stats
 * A seperate messaging api to help connect your users to you so can give them live assistance.
+* Live api tester and link generator on the app
 
 ## Contact
 This is a fairly new API so if there's anything that you think would be cool to add or if there's any issues please definitely let me know!
