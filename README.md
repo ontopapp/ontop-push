@@ -103,4 +103,4 @@ This is a fairly new API so if there's anything that you think would be cool to 
 **poya@gizmolabs.ca**
 
 
-[playstorelink](https://play.google.com/store/apps/details?id=com.poya.ontop)
+[playstorelink]: https://play.google.com/store/apps/details?id=com.poya.ontop
