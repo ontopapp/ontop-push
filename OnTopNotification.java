@@ -1,4 +1,6 @@
+/* Add your pakage
 package com.poya.notifications;
+*/
 
 import android.util.Log;
 
@@ -17,9 +19,9 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by Poya on 2016-04-12.
  */
-public class OnTopNotification
+public class OnTop
 {
-    public static final String TAG = "OnTopNotification";
+    public static final String TAG = "OnTop";
     public static final int VERSION_CODE = 1;
     private final String SEND_END_POINT = "http://ontop.tech/api/send";
 
@@ -33,7 +35,7 @@ public class OnTopNotification
     private boolean notificationVibrate = true;
     private JSONObject custom = new JSONObject();
 
-    public OnTopNotification(String appId, String appSecret)
+    public OnTop(String appId, String appSecret)
     {
         this.appId = appId;
         this.appSecret = appSecret;
