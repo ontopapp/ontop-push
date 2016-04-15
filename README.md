@@ -1,17 +1,17 @@
-# Notification API
+# OnTop Notification API
 ## Intro
-The idea behind OnTop has to been to make it for others like myself who have developed a number of apps to stay on top whats happening with or within their software. I'm sure there are other services that enable this but I wanted a simple app/api combo that could be easily added with one line of code to send you push updates for anything you can think of like exceptions, user actions, app use or whatever else on whatever platform or app type. Also the api and app are completely free to use!
+The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top whats happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself for anything you can think of. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. Also **the api and app are completely free to use!**
 
-The way it works is you download the app (OnTop Notifications) currently on Play Store and add and app. You'll receive an app ID nd SECRET to use with the api.
+The way it works is you need to download the app (OnTop Notifications) currently on Play Store and add and app. You'll receive an app ID and SECRET KEY to use with the api.
 
-The API has only one end point to receive push notifications
+The API has only one end point to send push notifications to yourself
 ```
 GET http://ontop.tech/api/push
 ```
-I also plan to provide class files for Android, PHP, and other languages soon to make things easier.
+I also plan to provide class files for Android, PHP, and other languages soon to make things easier. If anyone whats to convert `OnTop.java` to any other language, just send it to me and I'll add it in.
 
 ## Api docs
-### GET / POST
+### GET / POST Methods
 Here's the full info on the GET endpoint. Remember that there's a 1000 character limit on GET calls. Aside from `id` and `key` params everything else is optional
 ```
 GET http://ontop.tech/api/push?
@@ -33,42 +33,47 @@ POST    http://ontop.tech/api/push?is_post=1
 
 ### Java (Android)
 To make things easier I've added a class called `OnTop.java` for use in Android applictions that should make things easier Feel free to edit it as you need.
-Just one dependency, you need [LoopJ's](http://loopj.com/android-async-http/) Asynchronous Http client for Android or you can modify `OnTop.send()` to use your own method.
+Just one dependency, you need [LoopJ](http://loopj.com/android-async-http/)'s Asynchronous Http client for Android or you can modify `OnTop.send()` to use your own method.
 Add the line below to your app.gradle
 ```
 compile 'com.loopj.android:android-async-http:1.4.9'
 ```
-The class is easy enough to use. You can also read the docs for each method in the to get more details.
+The class is easy enough to use. You can also read the docs for each method in the `OnTop.java` file to get more details.
 ```java
 OnTop ontop = new OnTop(YOUR_APP_ID, YOUR_APP_SECRET);
-ontop.setMessage("This is a test for appID: " + APP_ID);
+ontop.setMessage("This is a test for appID: " + YOUR_APP_ID);
 ontop.send();
 
 //or just
-new OnTop(APP_ID, APP_SECRET).setMessage("This is a test for appID: " + APP_ID).send();
+new OnTop(YOUR_APP_ID, YOUR_APP_SECRET).setMessage("This is a test for appID: " + YOUR_APP_ID).send();
 ```
 You can also set any of the following options to help you manage your events
 #### Setting Category
 ```Java
-ontop.setCategory(STRING);
+ontop.setCategory(String);
 ```
 #### Setting action
 ```Java
-ontop.setAction(STRING);
+ontop.setAction(String);
 ```
 #### Setting View tag
 ```Java
-ontop.setView(STRING);
+ontop.setView(String);
 ```
 #### Setting Custom fields
 KEY should be a string such as "user_id", "user_name", etc
 VALUE can be of type String, int, boolean, long, or float
-Just keep in mind that if you plan on using long strings or lots of data for custom, to use either use `send()` method or if you're doing manually to use the POST end method.
+Just keep in mind that if you plan on using long strings or lots of data for custom, to use either use `send()` method or if you're doing it manually, to use the POST end method.
 ```Java
 ontop.setCustom(KEY, VALUE);
 ```
-#### Adjustments
+#### Other Adjustments
 ```Java
 ontop.setNotificationSound(boolean);
 ontop.setNotificationVibrate(boolean);
 ```
+
+
+## Contact
+This is a fairly new API so if there's anything that you think would be cool to add or if there's any issues please definitely let me know!
+**poya@gizmolabs.ca**
