@@ -41,7 +41,7 @@ compile 'com.loopj.android:android-async-http:1.4.9'
 The class is easy enough to use. You can also read the docs for each method in the `OnTop.java` file to get more details.
 ```java
 OnTop ontop = new OnTop(YOUR_APP_ID, YOUR_APP_SECRET);
-ontop.setMessage("This is a test for appID: " + YOUR_APP_ID);
+ontop.setMessage("This is a test");
 ontop.send();
 
 //or just
@@ -50,36 +50,28 @@ new OnTop(YOUR_APP_ID, YOUR_APP_SECRET).setMessage("This is a test for appID: " 
 You can also set any of the following options to help you manage your events
 ##### Setting Category
 ```Java
-/**
- * Add a category to represent the entities/categories. (i.e. "user", "song")
- * Can contain only alphabet, underscore, and numbers with max 64 characters.
- */
+// Add a category to represent the entities/categories. (i.e. "user", "song")
+// Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setCategory(String);
 ```
 ##### Setting action
 ```Java
-/**
- * Add a action tag to represent the action performed. (i.e. "like", "add", "share")
- * Can contain only alphabet, underscore, and numbers with max 64 characters.
- */
+// Add a action tag to represent the action performed. (i.e. "like", "add", "share")
+// Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setAction(String);
 ```
 ##### Setting View tag
 ```Java
-/**
- * Add a view tag to represent the view/page that the event has occurred. (i.e. "login", "new_item")
- * Can contain only alphabet, underscore, and numbers with max 64 characters.
- */
+// Add a view tag to represent the view/page that the event has occurred. (i.e. "login", "new_item")
+// Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setView(String);
 ```
 ##### Setting Custom fields
 Just keep in mind that if you plan on using long strings or lots of data for custom, to use either use `send()` method or if you're doing it manually, to use the POST end method.
 ```Java
-/**
- * Add a custom field to hold any meta data for future reference.
- * KEY      should be a string such as "user_id", "user_name", etc
- * VALUE    can be of type String, int, boolean, long, or float
- */
+// Add a custom field to hold any meta data for future reference.
+// KEY      should be a string such as "user_id", "user_name", etc
+// VALUE    can be of type String, int, boolean, long, or float
 ontop.setCustom(KEY, VALUE);
 ```
 ##### Other Adjustments
@@ -88,6 +80,28 @@ ontop.setCustom(KEY, VALUE);
 ontop.setNotificationSound(boolean);
 /** If set to true the notification you receive will beep your phone (its falseby default cause it gets annoying!) */
 ontop.setNotificationVibrate(boolean);
+```
+
+### PHP API (OnTop.php)
+The PHP functions are idntical to the Java version so refer to Java docs for the descriptions. Except the `send()` function uses a `file_get_contents` meethod so it doesnt need a secondary library.
+
+Example:
+```php
+$ontop = new OnTop(YOU_APP_API, YOUR_APP_SECRET);
+$ontop->setMessage("This is a test notification!");
+$ontop->send();
+```
+Here's the sumary of availabe functions:
+```php
+$ontop->setMessage("Text");             // set notification msg
+$ontop->setCategory("user");            // (optional) set event category
+$ontop->setAction("follow");            // (optional) set event action
+$ontop->setView("testing");             // (optional) set event view
+$ontop->setCustom("user_id", 324);      // (optional) set a custom key-value pair
+$ontop->setNotificationSound(false);    // (optional) whether or not to play a sound
+$ontop->setNotificationVibrate(true);   // (optional) whether or not to vibrate the device
+$ontop->getCompiledUrl();               // returns a compiled GET url that can be used in the browser
+$ontop->send();                         // makes the call using POST method request
 ```
 
 ### To Do
