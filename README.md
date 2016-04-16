@@ -4,6 +4,11 @@ The idea behind OnTop has to been to make it easy for others like myself who hav
 
 The way it works is you need to download the [OnTop Notifications App][playstorelink] on Play Store and add your app. You'll receive an app ID and SECRET KEY to use with the api.
 
+<img src="http://ontop.tech/img/Screenshot4.jpg" width="200" />
+<img src="http://ontop.tech/img/Screenshot3.jpg" width="200" />
+<img src="http://ontop.tech/img/Screenshot1.jpg" width="200" />
+<img src="http://ontop.tech/img/Screenshot2.jpg" width="200" />
+
 The API has only one end point to send push notifications to yourself
 ```
 GET http://ontop.tech/api/push
@@ -31,7 +36,7 @@ POST    http://ontop.tech/api/push?is_post=1
         ... all the same var names for POST params
 ```
 
-### Java (Android)
+### Java / Android (OnTop.java)
 To make things easier I've added a class called `OnTop.java` for use in Android applictions that should make things easier Feel free to edit it as you need.
 Just one dependency, you need [LoopJ](http://loopj.com/android-async-http/)'s Asynchronous Http client for Android or you can modify `OnTop.send()` to use your own method.
 Add the line below to your app.gradle
@@ -101,7 +106,7 @@ $ontop->setCustom("user_id", 324);      // (optional) set a custom key-value pai
 $ontop->setNotificationSound(false);    // (optional) whether or not to play a sound
 $ontop->setNotificationVibrate(true);   // (optional) whether or not to vibrate the device
 $ontop->getCompiledUrl();               // returns a compiled GET url that can be used in the browser
-$ontop->send();                         // makes the call using POST method request
+$ontop->send();                         // makes the call using POST method
 ```
 
 ### To Do
