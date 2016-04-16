@@ -30,7 +30,7 @@ GET http://ontop.tech/api/push?
     noti_sound  <1 or 0>        Whether or not to play sound on notification received for this notification (Default 0)
     custom      <jSon string>   Encoded JSON String of any vars that you'd like to send with event (i.e. {"user_id":342})
 ```
-In case your call is longer than 1000 characters or you prefer using POST, you can also send to the same end point but add `is_post=1`
+In case your call is longer than 1000 characters or you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
 ```
 POST    http://ontop.tech/api/push?is_post=1
         ... all the same var names for POST params
@@ -72,7 +72,7 @@ ontop.setAction(String);
 ontop.setView(String);
 ```
 ##### Setting Custom fields
-Just keep in mind that if you plan on using long strings or lots of data for custom, to use either use `send()` method or if you're doing it manually, to use the POST end method.
+Just keep in mind that if you plan on using long strings or lots of data for custom, you should either use `send()` method, or if you're doing it manually, to use a POST method.
 ```Java
 // Add a custom field to hold any meta data for future reference.
 // KEY      should be a string such as "user_id", "user_name", etc
@@ -81,14 +81,14 @@ ontop.setCustom(KEY, VALUE);
 ```
 ##### Other Adjustments
 ```Java
-/** If set to false the notification you receive wont vibrate your phone (it's true by default) */
+// If set to false the notification you receive wont vibrate your phone (it's true by default)
 ontop.setNotificationSound(boolean);
-/** If set to true the notification you receive will beep your phone (its falseby default cause it gets annoying!) */
+// If set to true the notification you receive will beep your phone (its falseby default cause it gets annoying!)
 ontop.setNotificationVibrate(boolean);
 ```
 
 ### PHP API (OnTop.php)
-The PHP functions are idntical to the Java version so refer to Java docs for the descriptions. Except the `send()` function uses a `file_get_contents` meethod so it doesnt need a secondary library.
+The PHP functions are identical to the Java version so refer to Java docs for the descriptions. Except, the `send()` function uses a `file_get_contents` method so it doesn't need a secondary library.
 
 Example:
 ```php
