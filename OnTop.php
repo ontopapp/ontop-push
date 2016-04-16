@@ -68,7 +68,6 @@ class OnTop
      * Can contain only alphabet, underscore, and numbers with max 64 characters.
      *
      * @param string $action        Name of the action
-     * @return self
      */
     public function setAction($action)
     {
