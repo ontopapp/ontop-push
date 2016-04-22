@@ -171,7 +171,7 @@ class OnTop
         if ($this->view != "")       $data['view']  = $this->view;
         if ($this->category != "")   $data['category'] = $this->category;
         if ($this->action != "")     $data['action'] = $this->action;
-        if (!empty($custom))         $data['custom'] = json_encode($this->custom);
+        if (!empty($this->custom))   $data['custom'] = json_encode($this->custom);
 
         // use key 'http' even if you send the request to https://...
         $options = array(
