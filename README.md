@@ -7,7 +7,7 @@ The way it works is you need to download the [OnTop Notifications App][playstore
 <img src="http://ontop.tech/img/Screenshot4.jpg" width="200" />
 <img src="http://ontop.tech/img/Screenshot3.jpg" width="200" />
 <img src="http://ontop.tech/img/Screenshot1.jpg" width="200" />
-<img src="http://ontop.tech/img/Screenshot2.jpg" width="200" />
+<img src="http://ontop.tech/img/Screenshot5.jpg" width="200" />
 
 The API has only one end point to send push notifications to yourself
 ```
