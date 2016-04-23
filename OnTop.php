@@ -140,7 +140,7 @@ class OnTop
         if ($this->category != "")   $url .= "&category=" . $this->category;
         if ($this->action != "")     $url .= "&action=" . $this->action;
         if ($this->message != "")    $url .= "&message=" . urlencode($this->message);
-        if (!empty($custom))         $url .= "&custom=" . urlencode(json_encode($this->custom));
+        if (!empty($this->custom))         $url .= "&custom=" . urlencode(json_encode($this->custom));
         $url .= "&noti_sound="       . ($this->notificationSound ? 1 : 0);
         $url .= "&noti_vibrate="     . ($this->notificationVibrate ? 1 : 0);
 
