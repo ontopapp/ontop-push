@@ -9,20 +9,20 @@ Can be used for:
 - Getting alerted of new questions or issues raised by users
 
 #### Details
-The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top whats happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself for anything you can think of. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. Also **the api and app are completely free to use!**
-
-The way it works is you need to download the [OnTop Notifications App][playstorelink] on Play Store and add your app. You'll receive an app ID and SECRET KEY to use with the api.
+The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top of what's happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. Also **the api and app are completely free to use!**
 
 <img src="http://ontop.tech/img/Screenshot4.jpg" width="200" />
 <img src="http://ontop.tech/img/Screenshot3.jpg" width="200" />
 <img src="http://ontop.tech/img/Screenshot1.jpg" width="200" />
 <img src="http://ontop.tech/img/Screenshot5.jpg" width="200" />
 
+
+The way it works is you need to download the [OnTop Notifications App][playstorelink] on Play Store and add your app. You'll receive an app ID and SECRET KEY to use with the api.
 The API has only one end point to send push notifications to yourself
 ```
 GET http://ontop.tech/api/push
 ```
-I also plan to provide class files for Android, PHP, and other languages soon to make things easier. If anyone whats to convert `OnTop.java` to any other language, just send it to me and I'll add it in.
+I also plan to provide class files for Android, PHP, and other languages soon to make the API easier to implement. If anyone wants to convert `OnTop.php` to any other language, just send it to me and I'll add it in.
 
 ## Api docs
 ### GET / POST Methods
@@ -46,9 +46,9 @@ POST    http://ontop.tech/api/push?is_post=1
 ```
 
 ### Java / Android (OnTop.java)
-To make things easier I've added a class called `OnTop.java` for use in Android applictions that should make things easier Feel free to edit it as you need.
-Just one dependency, you need [LoopJ](http://loopj.com/android-async-http/)'s Asynchronous Http client for Android or you can modify `OnTop.send()` to use your own method.
-Add the line below to your app.gradle
+To make things easier I've added a class called `OnTop.java` for use in Android applictions. Feel free to edit it as you need.
+There's just one dependency tho, you need [LoopJ](http://loopj.com/android-async-http/)'s Asynchronous Http client for Android or you can modify `OnTop.send()` function to use your own method.
+For the LoopJ plugin, add the line below to your app.gradle
 ```
 compile 'com.loopj.android:android-async-http:1.4.9'
 ```
@@ -59,22 +59,22 @@ ontop.setMessage("This is a test");
 ontop.send();
 
 //or just
-new OnTop(YOUR_APP_ID, YOUR_APP_SECRET).setMessage("This is a test for appID: " + YOUR_APP_ID).send();
+new OnTop(YOUR_APP_ID, YOUR_APP_SECRET).setMessage("This is a test").send();
 ```
 You can also set any of the following options to help you manage your events
-##### Setting Category
+##### Setting a Category
 ```Java
 // Add a category to represent the entities/categories. (i.e. "user", "song")
 // Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setCategory(String);
 ```
-##### Setting action
+##### Setting an Action
 ```Java
 // Add a action tag to represent the action performed. (i.e. "like", "add", "share")
 // Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setAction(String);
 ```
-##### Setting View tag
+##### Setting a View tag
 ```Java
 // Add a view tag to represent the view/page that the event has occurred. (i.e. "login", "new_item")
 // Can contain only alphabet, underscore, and numbers with max 64 characters.
@@ -129,6 +129,7 @@ Here are some additions I'm thinking of, feel free to suggest more
 ## Contact
 This is a fairly new API so if there's anything that you think would be cool to add or if there's any issues please definitely let me know!
 **poya@gizmolabs.ca**
+**[http://poya-r.com](http://poya-r.com)**
 
 
 [playstorelink]: https://play.google.com/store/apps/details?id=com.poya.ontop
