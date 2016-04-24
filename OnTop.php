@@ -14,8 +14,6 @@ class OnTop
     private $view = "";
     private $category = "";
     private $action = "";
-    private $notificationSound = false;
-    private $notificationVibrate = true;
     private $custom = array();
 
 
@@ -86,38 +84,13 @@ class OnTop
     }
 
     /**
-     * (Optional)
-     * s
-     * Default to true
-     *
-     * @param boolean $notificationVibrate   should the notification vibrate the phone?
-     */
-    public function setNotificationVibrate($notificationVibrate)
-    {
-        $this->notificationVibrate = $notificationVibrate;
-    }
-
-    /**
-     * (Optional)
-     * Whether or not play a ringtone on notification received for this notification
-     * Default to false
-     *
-     * @param boolean $notificationSound   should the notification play a ringtone?
-     * @return self
-     */
-    public function setNotificationSound($notificationSound)
-    {
-        $this->notificationSound = $notificationSound;
-    }
-
-    /**
      * Returns the very base API call url with authentication info to be used for either GET/POST
      * You don't need this if you're using either {@link OnTop#getCompiledUrl()}
      * or {@link OnTop#send()}
      *
      * @return string Base url with required auth info
      */
-    public function getBaseUrl()
+    private function getBaseUrl()
     {
         $url = self::SEND_END_POINT
                 . "?id="        . $this->appId
@@ -141,8 +114,6 @@ class OnTop
         if ($this->action != "")     $url .= "&action=" . $this->action;
         if ($this->message != "")    $url .= "&message=" . urlencode($this->message);
         if (!empty($this->custom))         $url .= "&custom=" . urlencode(json_encode($this->custom));
-        $url .= "&noti_sound="       . ($this->notificationSound ? 1 : 0);
-        $url .= "&noti_vibrate="     . ($this->notificationVibrate ? 1 : 0);
 
         // As a last resort if url is too long for a GET call 
         // cut it short so that the call doesn't fail
@@ -163,10 +134,7 @@ class OnTop
     public function send()
     {
         $url = $this->getBaseUrl() . "&is_post=1";
-        $data = array(
-            'noti_sound'    => ($this->notificationSound ? 1 : 0),
-            'noti_vibrate'  => ($this->notificationVibrate ? 1 : 0),
-        );
+        $data = array();
         if ($this->message != "")    $data['message'] = $this->message;
         if ($this->view != "")       $data['view']  = $this->view;
         if ($this->category != "")   $data['category'] = $this->category;
