@@ -3,11 +3,10 @@
 #### Summary
 In summary, this is an api/app combo to send notifications to your your phone using a GET call.
 Can be used for:
-- Exception reporting or server crashes or other situations requiring immediate attention.
+- Getting notified of new content/actions on your app that require review
+- Reporting server crashes, bugs, or situations requiring immediate attention.
 - Simple app analytics and engagement studies for new apps
-- A/B testing
-- Getting notified of new content that requires review
-- Answering user questions/support
+- Getting alerted of new questions or issues raised by users
 
 #### Details
 The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top whats happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself for anything you can think of. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. Also **the api and app are completely free to use!**
