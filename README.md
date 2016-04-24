@@ -35,8 +35,6 @@ GET http://ontop.tech/api/push?
     category    <category tag>  Add a category to represent the entities/categories. i.e. "user", "song"
     action      <action tag>    Add a action tag to represent the action performed. i.e. "like", "add", "share"
     view        <View tag>      Add a view tag to represent the view/page that the event has occurred. i.e. "login", "add item"
-    noti_vibrate<1 or 0>        Whether or not to vibrate on notification received for this notification (Default 1)
-    noti_sound  <1 or 0>        Whether or not to play sound on notification received for this notification (Default 0)
     custom      <jSon string>   Encoded JSON String of any vars that you'd like to send with event (i.e. {"user_id":342})
 ```
 In case your call is longer than 1000 characters or you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
@@ -88,13 +86,6 @@ Just keep in mind that if you plan on using long strings or lots of data for cus
 // VALUE    can be of type String, int, boolean, long, or float
 ontop.setCustom(KEY, VALUE);
 ```
-##### Other Adjustments
-```Java
-// If set to false the notification you receive wont vibrate your phone (it's true by default)
-ontop.setNotificationSound(boolean);
-// If set to true the notification you receive will beep your phone (its falseby default cause it gets annoying!)
-ontop.setNotificationVibrate(boolean);
-```
 
 ### PHP API (OnTop.php)
 The PHP functions are identical to the Java version so refer to Java docs for the descriptions. Except, the `send()` function uses a `file_get_contents` method so it doesn't need a secondary library.
@@ -112,8 +103,6 @@ $ontop->setCategory("user");            // (optional) set event category
 $ontop->setAction("follow");            // (optional) set event action
 $ontop->setView("testing");             // (optional) set event view
 $ontop->setCustom("user_id", 324);      // (optional) set a custom key-value pair
-$ontop->setNotificationSound(false);    // (optional) whether or not to play a sound
-$ontop->setNotificationVibrate(true);   // (optional) whether or not to vibrate the device
 $ontop->getCompiledUrl();               // returns a compiled GET url that can be used in the browser
 $ontop->send();                         // makes the call using POST method
 ```
@@ -128,7 +117,7 @@ Here are some additions I'm thinking of, feel free to suggest more
 
 ## Contact
 This is a fairly new API so if there's anything that you think would be cool to add or if there's any issues please definitely let me know!
-**poya@gizmolabs.ca**
+**poya@gizmolabs.ca** 
 **[http://poya-r.com](http://poya-r.com)**
 
 
