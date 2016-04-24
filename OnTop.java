@@ -1,3 +1,4 @@
+/** Change this to your own package path if you're adding it manually */
 package com.poya.notifications;
 
 import android.util.Log;
