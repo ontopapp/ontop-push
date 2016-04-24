@@ -1,5 +1,5 @@
-/** Change this to your own package path if you're adding it manually */
-package com.poya.notifications;
+/** change to your own package path */
+package com.poya.ontop;
 
 import android.util.Log;
 
@@ -22,7 +22,7 @@ public class OnTop
 {
     public static final String TAG = "OnTop";
     public static final int VERSION_CODE = 1;
-    private final String SEND_END_POINT = "http://ontop.tech/api/send";
+    private final String SEND_END_POINT = "http://ontop.tech/api/push";
 
     private String appId = "";
     private String appSecret = "";
@@ -30,8 +30,6 @@ public class OnTop
     private String view = "";
     private String category = "";
     private String action = "";
-    private boolean notificationSound = false;
-    private boolean notificationVibrate = true;
     private JSONObject custom = new JSONObject();
 
     public OnTop(String appId, String appSecret)
@@ -180,46 +178,18 @@ public class OnTop
     }
 
     /**
-     * (Optional)
-     * Whether or not to vibrate on notification received for this notification
-     * Default to true
-     *
-     * @param notificationVibrate   should the notification vibrate the phone?
-     * @return self
-     */
-    public OnTop setNotificationVibrate(boolean notificationVibrate)
-    {
-        this.notificationVibrate = notificationVibrate;
-        return this;
-    }
-
-    /**
-     * (Optional)
-     * Whether or not play a ringtone on notification received for this notification
-     * Default to false
-     *
-     * @param notificationSound   should the notification play a ringtone?
-     * @return self
-     */
-    public OnTop setNotificationSound(boolean notificationSound)
-    {
-        this.notificationSound = notificationSound;
-        return this;
-    }
-
-    /**
      * Returns the very base API call url with authentication info to be used for either GET/POST
      * You don't need this if you're using either {@link OnTop#getCompiledUrl()}
      * or {@link OnTop#send()}
      *
      * @return Base url with required auth info
      */
-    public String getBaseUrl()
+    private String getBaseUrl()
     {
         String url = SEND_END_POINT
                 + "?id="        + this.appId
                 + "&key="       + this.appSecret
-                + "&api_ver="   + this.VERSION_CODE;
+                + "&api_ver="   + VERSION_CODE;
         return url;
     }
 
@@ -233,8 +203,6 @@ public class OnTop
     public String getCompiledUrl()
     {
         String url = getBaseUrl();
-        url += "&noti_sound="       + (this.notificationSound ? 1 : 0);
-        url += "&noti_vibrate="     + (this.notificationVibrate ? 1 : 0);
         if (!view.equals(""))       url += "&view=" + this.view;
         if (!category.equals(""))   url += "&category=" + this.category;
         if (!action.equals(""))     url += "&action=" + this.action;
@@ -258,8 +226,6 @@ public class OnTop
         final String url = getBaseUrl() + "&is_post=1";
 
         RequestParams params = new RequestParams();
-        params.put("noti_sound", (this.notificationSound ? 1 : 0));
-        params.put("noti_vibrate", (this.notificationVibrate ? 1 : 0));
         if (!view.equals(""))       params.put("view", this.view);
         if (!category.equals(""))   params.put("category", this.category);
         if (!action.equals(""))     params.put("action", this.action);
