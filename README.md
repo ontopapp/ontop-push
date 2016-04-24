@@ -1,7 +1,7 @@
 # OnTop Notification API
 ## Intro
 #### Summary
-In summary, this is an api/app combo to send notifications to your your phone using a GET call.
+In summary, this is an api/app combo to send notifications to your phone using a GET call.
 Can be used for:
 - Getting notified of new content/actions on your app that require review
 - Reporting server crashes, bugs, or situations requiring immediate attention.
