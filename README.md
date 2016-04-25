@@ -9,7 +9,7 @@ Can be used for:
 - Getting alerted of new questions or issues raised by users
 
 #### Details
-The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top of what's happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. Also **the api and app are completely free to use!**
+The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top of what's happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. 
 
 <img src="http://ontop.tech/img/Screenshot4.jpg" width="200" />
 <img src="http://ontop.tech/img/Screenshot3.jpg" width="200" />
@@ -26,7 +26,7 @@ I also plan to provide class files for Android, PHP, and other languages soon to
 
 ## Api docs
 ### GET / POST Methods
-Here's the full info on the GET endpoint. Remember that there's a 1000 character limit on GET calls. Aside from `id` and `key` params everything else is optional
+Here's the full info on the GET endpoint. Aside from `id` and `key` params everything else is optional
 ```
 GET http://ontop.tech/api/push?
     id          <app id>        required
@@ -37,7 +37,7 @@ GET http://ontop.tech/api/push?
     view        <View tag>      Add a view tag to represent the view/page that the event has occurred. i.e. "login", "add item"
     custom      <jSon string>   Encoded JSON String of any vars that you'd like to send with event (i.e. {"user_id":342})
 ```
-In case your call is longer than 1000 characters or you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
+In case you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
 ```
 POST    http://ontop.tech/api/push?is_post=1
         ... all the same var names for POST params
@@ -117,7 +117,9 @@ Here are some additions I'm thinking of, feel free to suggest more
 
 ## Contact
 This is a fairly new API so if there's anything that you think would be cool to add or if there's any issues please definitely let me know!
+
 **poya@gizmolabs.ca** 
+
 **[http://poya-r.com](http://poya-r.com)**
 
 
