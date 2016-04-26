@@ -22,7 +22,7 @@ public class OnTop
 {
     public static final String TAG = "OnTop";
     public static final int VERSION_CODE = 1;
-    private final String SEND_END_POINT = "http://ontop.tech/api/push";
+    private final String SEND_END_POINT = "https://ontop.tech/api/push";
 
     private String appId = "";
     private String appSecret = "";
