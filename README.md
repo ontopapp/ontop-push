@@ -11,16 +11,16 @@ Can be used for:
 #### Details
 The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top of what's happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. 
 
-<img src="http://ontop.tech/img/Screenshot4.jpg" width="200" />
-<img src="http://ontop.tech/img/Screenshot3.jpg" width="200" />
-<img src="http://ontop.tech/img/Screenshot1.jpg" width="200" />
-<img src="http://ontop.tech/img/Screenshot5.jpg" width="200" />
+<img src="https://ontop.tech/img/Screenshot4.jpg" width="200" />
+<img src="https://ontop.tech/img/Screenshot3.jpg" width="200" />
+<img src="https://ontop.tech/img/Screenshot1.jpg" width="200" />
+<img src="https://ontop.tech/img/Screenshot5.jpg" width="200" />
 
 
 The way it works is you need to download the [OnTop Notifications App][playstorelink] on Play Store and add your app. You'll receive an app ID and SECRET KEY to use with the api.
 The API has only one end point to send push notifications to yourself
 ```
-GET http://ontop.tech/api/push
+GET https://ontop.tech/api/push
 ```
 I also plan to provide class files for Android, PHP, and other languages soon to make the API easier to implement. If anyone wants to convert `OnTop.php` to any other language, just send it to me and I'll add it in.
 
@@ -28,7 +28,7 @@ I also plan to provide class files for Android, PHP, and other languages soon to
 ### GET / POST Methods
 Here's the full info on the GET endpoint. Aside from `id` and `key` params everything else is optional
 ```
-GET http://ontop.tech/api/push?
+GET https://ontop.tech/api/push?
     id          <app id>        required
     key         <app secret>    required
     message     <Any text>      Message that will primarily be shown on the notification (250 char max)
@@ -39,8 +39,8 @@ GET http://ontop.tech/api/push?
 ```
 In case you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
 ```
-POST    http://ontop.tech/api/push?is_post=1
-        ... all the same var names for POST params
+POST    https://ontop.tech/api/push?is_post=1
+            ... all the same var names for POST params
 ```
 
 ### Java / Android (OnTop.java)
