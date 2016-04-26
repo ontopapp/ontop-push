@@ -6,7 +6,7 @@
 class OnTop
 {
     const VERSION_CODE = 1;
-    const SEND_END_POINT = "http://ontop.tech/api/push";
+    const SEND_END_POINT = "https://ontop.tech/api/push";
 
     private $appId = "";
     private $appSecret = "";
