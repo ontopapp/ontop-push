@@ -26,7 +26,7 @@ I also plan to provide class files for Android, PHP, and other languages soon to
 
 ## Api docs
 ### GET / POST Methods
-Here's the full info on the GET endpoint. Aside from `id` and `key` params everything else is optional
+Here's the full info on the GET endpoint. Aside from `id` and `key` params everything else is optional. **Also you can use the category/action combo to organize your notifications in groups** and manage their behavious separately.
 ```
 GET https://ontop.tech/api/push?
     id          <app id>        required
@@ -34,7 +34,6 @@ GET https://ontop.tech/api/push?
     message     <Any text>      Message that will primarily be shown on the notification (250 char max)
     category    <category tag>  Add a category to represent the entities/categories. i.e. "user", "song"
     action      <action tag>    Add a action tag to represent the action performed. i.e. "like", "add", "share"
-    view        <View tag>      Add a view tag to represent the view/page that the event has occurred. i.e. "login", "add item"
     custom      <jSon string>   Encoded JSON String of any vars that you'd like to send with event (i.e. {"user_id":342})
 ```
 In case you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
@@ -72,12 +71,6 @@ ontop.setCategory(String);
 // Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setAction(String);
 ```
-##### Setting a View tag
-```Java
-// Add a view tag to represent the view/page that the event has occurred. (i.e. "login", "new_item")
-// Can contain only alphabet, underscore, and numbers with max 64 characters.
-ontop.setView(String);
-```
 ##### Setting Custom fields
 Just keep in mind that if you plan on using long strings or lots of data for custom, you should either use `send()` method, or if you're doing it manually, to use a POST method.
 ```Java
@@ -101,7 +94,6 @@ Here's the sumary of availabe functions:
 $ontop->setMessage("Text");             // set notification msg
 $ontop->setCategory("user");            // (optional) set event category
 $ontop->setAction("follow");            // (optional) set event action
-$ontop->setView("testing");             // (optional) set event view
 $ontop->setCustom("user_id", 324);      // (optional) set a custom key-value pair
 $ontop->getCompiledUrl();               // returns a compiled GET url that can be used in the browser
 $ontop->send();                         // makes the call using POST method
