@@ -27,7 +27,6 @@ public class OnTop
     private String appId = "";
     private String appSecret = "";
     private String message = "";
-    private String view = "";
     private String category = "";
     private String action = "";
     private JSONObject custom = new JSONObject();
@@ -48,20 +47,6 @@ public class OnTop
     public OnTop setMessage(String message)
     {
         this.message = message;
-        return this;
-    }
-
-    /**
-     * (Optional)
-     * Add a view tag to represent the view/page that the event has occurred. (i.e. "login", "new_item")
-     * Can contain only alphabet, underscore, and numbers with max 64 characters.
-     *
-     * @param view          Name of the view
-     * @return self
-     */
-    public OnTop setView(String view)
-    {
-        this.view = view;
         return this;
     }
 
@@ -203,7 +188,6 @@ public class OnTop
     public String getCompiledUrl()
     {
         String url = getBaseUrl();
-        if (!view.equals(""))       url += "&view=" + this.view;
         if (!category.equals(""))   url += "&category=" + this.category;
         if (!action.equals(""))     url += "&action=" + this.action;
         if (!message.equals(""))    url += "&message=" + URLEncoder.encode(this.message);
@@ -226,7 +210,6 @@ public class OnTop
         final String url = getBaseUrl() + "&is_post=1";
 
         RequestParams params = new RequestParams();
-        if (!view.equals(""))       params.put("view", this.view);
         if (!category.equals(""))   params.put("category", this.category);
         if (!action.equals(""))     params.put("action", this.action);
         if (!message.equals(""))    params.put("message", this.message);
