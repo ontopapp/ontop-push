@@ -11,7 +11,6 @@ class OnTop
     private $appId = "";
     private $appSecret = "";
     private $message = "";
-    private $view = "";
     private $category = "";
     private $action = "";
     private $custom = array();
@@ -35,18 +34,6 @@ class OnTop
     public function setMessage($message)
     {
         $this->message = $message;
-    }
-
-    /**
-     * (Optional)
-     * Add a view tag to represent the view/page that the event has occurred. (i.e. "login", "new_item")
-     * Can contain only alphabet, underscore, and numbers with max 64 characters.
-     *
-     * @param string $view          Name of the view
-     */
-    public function setView($view)
-    {
-        $this->view = $view;
     }
 
     /**
@@ -109,11 +96,10 @@ class OnTop
     public function getCompiledUrl()
     {
         $url = $this->getBaseUrl();
-        if ($this->view != "")       $url .= "&view=" . $this->view;
         if ($this->category != "")   $url .= "&category=" . $this->category;
         if ($this->action != "")     $url .= "&action=" . $this->action;
         if ($this->message != "")    $url .= "&message=" . urlencode($this->message);
-        if (!empty($this->custom))         $url .= "&custom=" . urlencode(json_encode($this->custom));
+        if (!empty($this->custom))   $url .= "&custom=" . urlencode(json_encode($this->custom));
 
         // As a last resort if url is too long for a GET call 
         // cut it short so that the call doesn't fail
@@ -136,7 +122,6 @@ class OnTop
         $url = $this->getBaseUrl() . "&is_post=1";
         $data = array();
         if ($this->message != "")    $data['message'] = $this->message;
-        if ($this->view != "")       $data['view']  = $this->view;
         if ($this->category != "")   $data['category'] = $this->category;
         if ($this->action != "")     $data['action'] = $this->action;
         if (!empty($this->custom))   $data['custom'] = json_encode($this->custom);
