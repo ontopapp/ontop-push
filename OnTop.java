@@ -34,7 +34,7 @@ public class OnTop
     private String message = "";
     private String category = "";
     private String action = "";
-    private String react_url = "";
+    private String noti_action_url = "";
     private JSONObject custom = new JSONObject();
 
     public OnTop(String appId, String appSecret)
@@ -91,9 +91,9 @@ public class OnTop
      * @param url        Target URL
      * @return self
      */
-    public OnTop setReact(String url)
+    public OnTop setNotificationAction(String url)
     {
-        this.react_url = url;
+        this.noti_action_url = url;
         return this;
     }
 
@@ -211,7 +211,7 @@ public class OnTop
         if (!category.equals(""))   url += "&category=" + this.category;
         if (!action.equals(""))     url += "&action=" + this.action;
         if (!message.equals(""))    url += "&message=" + URLEncoder.encode(this.message);
-        if (!react_url.equals(""))  url += "&react_url=" + URLEncoder.encode(this.react_url);
+        if (!noti_action_url.equals(""))  url += "&noti_action_url=" + URLEncoder.encode(this.noti_action_url);
         url += "&custom=" + URLEncoder.encode(custom.toString());
 
         return url;
@@ -231,7 +231,7 @@ public class OnTop
         if (!category.equals(""))   params.put("category", this.category);
         if (!action.equals(""))     params.put("action", this.action);
         if (!message.equals(""))    params.put("message", this.message);
-        if (!react_url.equals(""))  params.put("react_url", this.react_url);
+        if (!noti_action_url.equals(""))  params.put("noti_action_url", this.noti_action_url);
         params.put("custom", custom.toString());
 
         Log.i(TAG, "POST Url: " + url);
