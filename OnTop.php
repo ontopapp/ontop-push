@@ -1,20 +1,23 @@
 <?php
-
 /**
- * Created by Poya on 2016-04-12.
+ * OnTop Notifications API
+ * Created by Poya R. (poya-r.com) on 2016-04-12.
+ * Use this api to send notifications to yourself through OnTop Notification mobile app.
+ * For more info visit:
+ *      https://github.com/ontopapp/ontop-push
+ *      https://ontop.tech
  */
 class OnTop
 {
     const VERSION_CODE = 1;
     const SEND_END_POINT = "https://ontop.tech/api/push";
-
     private $appId = "";
     private $appSecret = "";
     private $message = "";
     private $category = "";
     private $action = "";
+    private $noti_action_url = "";
     private $custom = array();
-
 
     /**
      * OnTop constructor.
@@ -60,6 +63,18 @@ class OnTop
     }
 
     /**
+     * You can add any external url to your notification.
+     * This will show up under your notification as a clickable action that'll take you to the
+     * supplied URL.
+     *
+     * @param string $url        Target URL
+     */
+    public function setNotificationAction($url)
+    {
+        $this->noti_action_url = $url;
+    }
+
+    /**
      * Add a custom field to hold any meta data for future reference.
      *
      * @param string $key       the key of the value being sent (i.e. "user_name")
@@ -80,9 +95,9 @@ class OnTop
     private function getBaseUrl()
     {
         $url = self::SEND_END_POINT
-                . "?id="        . $this->appId
-                . "&key="       . $this->appSecret
-                . "&api_ver="   . self::VERSION_CODE;
+            . "?id="        . $this->appId
+            . "&key="       . $this->appSecret
+            . "&api_ver="   . self::VERSION_CODE;
         return $url;
     }
 
@@ -96,16 +111,15 @@ class OnTop
     public function getCompiledUrl()
     {
         $url = $this->getBaseUrl();
-        if ($this->category != "")   $url .= "&category=" . $this->category;
-        if ($this->action != "")     $url .= "&action=" . $this->action;
-        if ($this->message != "")    $url .= "&message=" . urlencode($this->message);
+        if ($this->category != "")          $url .= "&category=" . $this->category;
+        if ($this->action != "")            $url .= "&action=" . $this->action;
+        if ($this->message != "")           $url .= "&message=" . urlencode($this->message);
+        if ($this->noti_action_url != "")   $url .= "&noti_action_url=" . urlencode($this->noti_action_url);
         if (!empty($this->custom))   $url .= "&custom=" . urlencode(json_encode($this->custom));
-
-        // As a last resort if url is too long for a GET call 
+        // As a last resort if url is too long for a GET call
         // cut it short so that the call doesn't fail
         if(strlen($url) > 1000)
             $url = substr($url, 0, 1000);
-
         return $url;
     }
 
@@ -121,11 +135,11 @@ class OnTop
     {
         $url = $this->getBaseUrl() . "&is_post=1";
         $data = array();
-        if ($this->message != "")    $data['message'] = $this->message;
-        if ($this->category != "")   $data['category'] = $this->category;
-        if ($this->action != "")     $data['action'] = $this->action;
+        if ($this->message != "")           $data['message'] = $this->message;
+        if ($this->category != "")          $data['category'] = $this->category;
+        if ($this->action != "")            $data['action'] = $this->action;
+        if ($this->noti_action_url != "")   $data['noti_action_url'] = $this->noti_action_url;
         if (!empty($this->custom))   $data['custom'] = json_encode($this->custom);
-
         // use key 'http' even if you send the request to https://...
         $options = array(
             'http' => array(
@@ -136,7 +150,6 @@ class OnTop
         );
         $context  = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
-
         if ($result === FALSE) {
             /* Ignore any errors or log them silently */
         }
