@@ -5,8 +5,8 @@ In summary, this is an api/app combo to send notifications to your phone using a
 Can be used for:
 - Getting notified of new content/actions on your app that require review
 - Reporting server crashes, bugs, or situations requiring immediate attention.
+- Getting push from an internet connected device such as arduino or any IOT device (your 3d printer sending you a push that the print is done, etc.)
 - Simple app analytics and engagement studies for new apps
-- Getting alerted of new questions or issues raised by users
 
 #### Details
 The idea behind OnTop has to been to make it easy for others like myself who have developed a number of apps to stay on top of what's happening with or within their apps. I'm sure there are other services that enable this but I wanted very a simple app/api combo that could be easily added with one line of code without bulky SDKs to send you push notifications to yourself. Right now I'm using it to get notified of exceptions, user actions, and app usage. But you can use it for whatever else on whichever platform or app type. 
@@ -26,7 +26,7 @@ I also plan to provide class files for Android, PHP, and other languages soon to
 
 ## Api docs
 ### GET / POST Methods
-Here's the full info on the GET endpoint. Aside from `id` and `key` params everything else is optional. **Also you can use the category/action combo to organize your notifications in groups** and manage their behavious separately.
+Here's the full info on the GET endpoint. Aside from `id` and `key` params everything else is optional. **Also you can use the category/action combo to organize your notifications in groups** and manage their behaviours separately.
 ```
 GET https://ontop.tech/api/push?
     id          <app id>        required
@@ -34,12 +34,13 @@ GET https://ontop.tech/api/push?
     message     <Any text>      Message that will primarily be shown on the notification (250 char max)
     category    <category tag>  Add a category to represent the entities/categories. i.e. "user", "song"
     action      <action tag>    Add a action tag to represent the action performed. i.e. "like", "add", "share"
+    noti_action_url <url>       If you supply a url here, it'll show up as a clickable btn at the bottom of the notification
     custom      <jSon string>   Encoded JSON String of any vars that you'd like to send with event (i.e. {"user_id":342})
 ```
 In case you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
 ```
 POST    https://ontop.tech/api/push?is_post=1
-            ... all the same var names for POST params
+            ... all the same var names as GET
 ```
 
 ### Java / Android (OnTop.java)
@@ -54,30 +55,25 @@ The class is easy enough to use. You can also read the docs for each method in t
 OnTop ontop = new OnTop(YOUR_APP_ID, YOUR_APP_SECRET);
 ontop.setMessage("This is a test");
 ontop.send();
-
 //or just
 new OnTop(YOUR_APP_ID, YOUR_APP_SECRET).setMessage("This is a test").send();
 ```
+##### Options
 You can also set any of the following options to help you manage your events
-##### Setting a Category
 ```Java
 // Add a category to represent the entities/categories. (i.e. "user", "song")
 // Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setCategory(String);
-```
-##### Setting an Action
-```Java
 // Add a action tag to represent the action performed. (i.e. "like", "add", "share")
 // Can contain only alphabet, underscore, and numbers with max 64 characters.
 ontop.setAction(String);
-```
-##### Setting Custom fields
-Just keep in mind that if you plan on using long strings or lots of data for custom, you should either use `send()` method, or if you're doing it manually, to use a POST method.
-```Java
 // Add a custom field to hold any meta data for future reference.
 // KEY      should be a string such as "user_id", "user_name", etc
 // VALUE    can be of type String, int, boolean, long, or float
 ontop.setCustom(KEY, VALUE);
+// Will add a clickable action button at the bottom of the notification  that'll take you to this url.
+// URL      a string url (i.e. http://google.com)
+ontop.setNotificationAction(URL);
 ```
 
 ### PHP API (OnTop.php)
@@ -89,14 +85,15 @@ $ontop = new OnTop(YOU_APP_API, YOUR_APP_SECRET);
 $ontop->setMessage("This is a test notification!");
 $ontop->send();
 ```
-Here's the sumary of availabe functions:
+Here's the sumary of availabe optional functions:
 ```php
-$ontop->setMessage("Text");             // set notification msg
-$ontop->setCategory("user");            // (optional) set event category
-$ontop->setAction("follow");            // (optional) set event action
-$ontop->setCustom("user_id", 324);      // (optional) set a custom key-value pair
-$ontop->getCompiledUrl();               // returns a compiled GET url that can be used in the browser
-$ontop->send();                         // makes the call using POST method
+$ontop->setMessage("Text");                         // set notification msg
+$ontop->setCategory("user");                        // (optional) set event category
+$ontop->setAction("follow");                        // (optional) set event action
+$ontop->setCustom("user_id", 324);                  // (optional) set a custom key-value pair
+$ontop->setNotificationAction("http://test.com");   // (optional) set a URL as an action button on the notification
+$ontop->getCompiledUrl();                           // returns a compiled GET url that can be used in the browser
+$ontop->send();                                     // makes the call using POST method
 ```
 
 ### To Do
@@ -109,6 +106,8 @@ Here are some additions I'm thinking of, feel free to suggest more
 
 ## Contact
 This is a fairly new API so if there's anything that you think would be cool to add or if there's any issues please definitely let me know!
+
+**https://ontop.tech**
 
 **poya@gizmolabs.ca** 
 
