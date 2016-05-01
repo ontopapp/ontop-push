@@ -16,19 +16,25 @@ import java.net.URLEncoder;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by Poya on 2016-04-12.
+ * OnTop Notifications API
+ * Created by Poya R. on 2016-04-12.
+ * Use this api to send notifications to yourself through OnTop Notification mobile app.
+ * For more info visit:
+ *      https://github.com/ontopapp/ontop-push
+ *      https://ontop.tech
  */
 public class OnTop
 {
     public static final String TAG = "OnTop";
     public static final int VERSION_CODE = 1;
-    private final String SEND_END_POINT = "https://ontop.tech/api/push";
+    private final String PUSH_END_POINT = "https://ontop.tech/api/push";
 
     private String appId = "";
     private String appSecret = "";
     private String message = "";
     private String category = "";
     private String action = "";
+    private String react_url = "";
     private JSONObject custom = new JSONObject();
 
     public OnTop(String appId, String appSecret)
@@ -74,6 +80,20 @@ public class OnTop
     public OnTop setAction(String action)
     {
         this.action = action;
+        return this;
+    }
+
+    /**
+     * You can add any external url to your notification.
+     * This will show up under your notification as a clickable action that'll take you to the
+     * supplied URL.
+     *
+     * @param url        Target URL
+     * @return self
+     */
+    public OnTop setReact(String url)
+    {
+        this.react_url = url;
         return this;
     }
 
@@ -171,7 +191,7 @@ public class OnTop
      */
     private String getBaseUrl()
     {
-        String url = SEND_END_POINT
+        String url = PUSH_END_POINT
                 + "?id="        + this.appId
                 + "&key="       + this.appSecret
                 + "&api_ver="   + VERSION_CODE;
@@ -191,10 +211,8 @@ public class OnTop
         if (!category.equals(""))   url += "&category=" + this.category;
         if (!action.equals(""))     url += "&action=" + this.action;
         if (!message.equals(""))    url += "&message=" + URLEncoder.encode(this.message);
+        if (!react_url.equals(""))  url += "&react_url=" + URLEncoder.encode(this.react_url);
         url += "&custom=" + URLEncoder.encode(custom.toString());
-
-        if(url.length() > 990)
-            Log.e(TAG, "The url is too long for a GET call. Must use POST.");
 
         return url;
     }
@@ -213,6 +231,7 @@ public class OnTop
         if (!category.equals(""))   params.put("category", this.category);
         if (!action.equals(""))     params.put("action", this.action);
         if (!message.equals(""))    params.put("message", this.message);
+        if (!react_url.equals(""))  params.put("react_url", this.react_url);
         params.put("custom", custom.toString());
 
         Log.i(TAG, "POST Url: " + url);
