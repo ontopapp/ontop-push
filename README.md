@@ -96,6 +96,22 @@ $ontop->getCompiledUrl();                           // returns a compiled GET ur
 $ontop->send();                                     // makes the call using POST method
 ```
 
+### JS Use Example using jQuery
+```js
+jQuery.ajax({
+    type: "GET", 
+    url: "https://ontop.tech/api/push", 
+    data: { 
+        'id' : <id>, 
+        'key' : <secret_key>, 
+        'message' : "Your message" 
+    }, 
+    async: true, 
+    cache: true, 
+    success: function(response) { } 
+});
+```
+
 ### To Do
 Here are some additions I'm thinking of, feel free to suggest more
 * Multiple users per app (so a team can stay on top of whats happening)
