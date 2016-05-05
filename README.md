@@ -40,7 +40,7 @@ GET https://ontop.tech/api/push?
 In case you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
 ```
 POST    https://ontop.tech/api/push?is_post=1
-            ... all the same var names as GET
+            ... all the same parameters as GET
 ```
 
 ### Java / Android (OnTop.java)
@@ -100,11 +100,11 @@ $ontop->send();                                     // makes the call using POST
 ```js
 jQuery.ajax({
     type: "GET", 
-    url: "https://ontop.tech/api/push", 
+    url: "https://ontop.tech/api/push?api_ver=1", 
     data: { 
-        'id' : <id>, 
-        'key' : <secret_key>, 
-        'message' : "Your message" 
+        'id' : <app id>, 
+        'key' : <secret key>, 
+        'message' : <Your message> 
     }, 
     async: true, 
     cache: true, 
