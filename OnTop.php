@@ -116,10 +116,7 @@ class OnTop
         if ($this->message != "")           $url .= "&message=" . urlencode($this->message);
         if ($this->noti_action_url != "")   $url .= "&noti_action_url=" . urlencode($this->noti_action_url);
         if (!empty($this->custom))   $url .= "&custom=" . urlencode(json_encode($this->custom));
-        // As a last resort if url is too long for a GET call
-        // cut it short so that the call doesn't fail
-        if(strlen($url) > 1000)
-            $url = substr($url, 0, 1000);
+        
         return $url;
     }
 
