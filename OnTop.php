@@ -94,10 +94,7 @@ class OnTop
      */
     private function getBaseUrl()
     {
-        $url = self::SEND_END_POINT
-            . "?id="        . $this->appId
-            . "&key="       . $this->appSecret
-            . "&api_ver="   . self::VERSION_CODE;
+        $url = self::SEND_END_POINT . "?api_ver=" . self::VERSION_CODE;
         return $url;
     }
 
@@ -111,12 +108,17 @@ class OnTop
     public function getCompiledUrl()
     {
         $url = $this->getBaseUrl();
+        $url .= "&id=" . $this->appId;
+        $url .= "&key=" . $this->appSecret;
         if ($this->category != "")          $url .= "&category=" . $this->category;
         if ($this->action != "")            $url .= "&action=" . $this->action;
         if ($this->message != "")           $url .= "&message=" . urlencode($this->message);
         if ($this->noti_action_url != "")   $url .= "&noti_action_url=" . urlencode($this->noti_action_url);
-        if (!empty($this->custom))   $url .= "&custom=" . urlencode(json_encode($this->custom));
-        
+        if (!empty($this->custom))          $url .= "&custom=" . urlencode(json_encode($this->custom));
+        // As a last resort if url is too long for a GET call
+        // cut it short so that the call doesn't fail
+        if(strlen($url) > 1000)
+            $url = substr($url, 0, 1000);
         return $url;
     }
 
@@ -130,13 +132,16 @@ class OnTop
      */
     public function send()
     {
-        $url = $this->getBaseUrl() . "&is_post=1";
+        $url = $this->getBaseUrl();
         $data = array();
+
+        $data['id']  = $this->appId;
+        $data['key'] = $this->appSecret;
         if ($this->message != "")           $data['message'] = $this->message;
         if ($this->category != "")          $data['category'] = $this->category;
         if ($this->action != "")            $data['action'] = $this->action;
         if ($this->noti_action_url != "")   $data['noti_action_url'] = $this->noti_action_url;
-        if (!empty($this->custom))   $data['custom'] = json_encode($this->custom);
+        if (!empty($this->custom))          $data['custom'] = json_encode($this->custom);
         // use key 'http' even if you send the request to https://...
         $options = array(
             'http' => array(
