@@ -17,7 +17,7 @@ import cz.msebera.android.httpclient.Header;
 
 /**
  * OnTop Notifications API
- * Created by Poya R. on 2016-04-12.
+ * Created by Poya R. (poya-r.com) on 2016-04-12.
  * Use this api to send notifications to yourself through OnTop Notification mobile app.
  * For more info visit:
  *      https://github.com/ontopapp/ontop-push
@@ -191,10 +191,7 @@ public class OnTop
      */
     private String getBaseUrl()
     {
-        String url = PUSH_END_POINT
-                + "?id="        + this.appId
-                + "&key="       + this.appSecret
-                + "&api_ver="   + VERSION_CODE;
+        String url = PUSH_END_POINT + "?api_ver=" + VERSION_CODE;
         return url;
     }
 
@@ -208,6 +205,9 @@ public class OnTop
     public String getCompiledUrl()
     {
         String url = getBaseUrl();
+
+        url += "&id="  + this.appId;
+        url += "&key=" + this.appSecret;
         if (!category.equals(""))   url += "&category=" + this.category;
         if (!action.equals(""))     url += "&action=" + this.action;
         if (!message.equals(""))    url += "&message=" + URLEncoder.encode(this.message);
@@ -225,14 +225,16 @@ public class OnTop
      */
     public void send()
     {
-        final String url = getBaseUrl() + "&is_post=1";
+        final String url = getBaseUrl();
 
         RequestParams params = new RequestParams();
-        if (!category.equals(""))   params.put("category", this.category);
-        if (!action.equals(""))     params.put("action", this.action);
-        if (!message.equals(""))    params.put("message", this.message);
-        if (!noti_action_url.equals(""))  params.put("noti_action_url", this.noti_action_url);
-        params.put("custom", custom.toString());
+        params.put("id", this.appId);
+        params.put("key", this.appSecret);
+        if (!category.equals(""))       params.put("category", this.category);
+        if (!action.equals(""))         params.put("action", this.action);
+        if (!message.equals(""))        params.put("message", this.message);
+        if (!noti_action_url.equals(""))params.put("noti_action_url", this.noti_action_url);
+        if (custom.length() > 0)        params.put("custom", custom.toString());
 
         Log.i(TAG, "POST Url: " + url);
         Log.i(TAG, "POST params: " + params.toString());
