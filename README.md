@@ -28,7 +28,7 @@ I also plan to provide class files for Android, PHP, and other languages soon to
 ### GET / POST Methods
 Here's the full info on the GET endpoint. Aside from `id` and `key` params everything else is optional. **Also you can use the category/action combo to organize your notifications in groups** and manage their behaviours separately.
 ```
-GET https://ontop.tech/api/push?
+GET https://ontop.tech/api/push
     id          <app id>        required
     key         <app secret>    required
     message     <Any text>      Message that will primarily be shown on the notification (250 char max)
@@ -39,7 +39,7 @@ GET https://ontop.tech/api/push?
 ```
 In case you prefer using POST, you can also send to the same end point but add `is_post=1` to the url.
 ```
-POST    https://ontop.tech/api/push?is_post=1
+POST    https://ontop.tech/api/push
             ... all the same parameters as GET
 ```
 
